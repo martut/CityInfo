@@ -1,0 +1,9 @@
+GET https://{{host}}:{{port}}/api/cities/1
+Accept: application/json
+
+###
+
+GET https://localhost:7210/api/cities
+Accept: application/json
+
+###
