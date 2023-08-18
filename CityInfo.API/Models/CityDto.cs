@@ -7,4 +7,8 @@ public class CityDto
     public string Name { get; set; } = string.Empty;
     
     public string? Description { get; set; }
+    
+    public ICollection<PointOfInterestDto> PointsOfInterest { get; set; } = new List<PointOfInterestDto>();
+
+    public int NumberOfPointsOfInterest => PointsOfInterest.Count;
 }
