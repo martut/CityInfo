@@ -35,7 +35,8 @@ builder.Services.AddTransient<IMailService, CloudMailService>();
 #endif
 
 builder.Services.AddDbContext<CityInfoContext>(
-    optionsBuilder => optionsBuilder.UseSqlite("Data Source=CityInfo.db"));
+    optionsBuilder => optionsBuilder.UseSqlite(
+        builder.Configuration["ConnectionStrings:CityInfoDBConnectionString"]));
 
 var app = builder.Build();
 
