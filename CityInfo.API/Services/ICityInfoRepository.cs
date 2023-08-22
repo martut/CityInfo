@@ -21,4 +21,6 @@ public interface ICityInfoRepository
     void DeletePointOfInterest(PointOfInterest pointOfInterest);
 
     Task<(IEnumerable<City>, PaginationMetadata)> GetCitiesAsync(string? name, string? searchQuery, int pageNumber, int pageSize);
+    
+    Task<bool> CityNameMatchesCityIdAsync(int cityId, string? cityName);
 }

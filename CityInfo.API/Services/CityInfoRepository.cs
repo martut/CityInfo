@@ -42,6 +42,11 @@ public class CityInfoRepository : ICityInfoRepository
         return (collection, paginationMetadata);
     }
 
+    public async Task<bool> CityNameMatchesCityIdAsync(int cityId, string? cityName)
+    {
+        return await _context.Cities.AnyAsync(c => c.Id == cityId && c.Name == cityName);
+    }
+
     public async Task<City?> GetCityAsync(int cityId, bool includePointsOfInterest)
     {
         var city = _context.Cities.Where(c => c.Id == cityId);
