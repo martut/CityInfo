@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace CityInfo.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
 [Authorize]
+[ApiVersion("1.0")]
+[ApiVersion("2.0")]
 public class CitiesController : ControllerBase
 {
     private readonly ICityInfoRepository _cityInfoRepository;
@@ -44,7 +46,17 @@ public class CitiesController : ControllerBase
         return Ok(results);
     }
 
+    
+    /// <summary>
+    ///     Get a city by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="includePointsOfInterest"></param>
+    /// <returns>an IActionResult</returns>
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetCity(int id, bool includePointsOfInterest = false)
     {
         var city = await _cityInfoRepository.GetCityAsync(id, includePointsOfInterest);
